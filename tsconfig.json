@@ -19,9 +19,6 @@
       "@tests/*": ["tests/*"]
     },
     "rootDir": "src/",
-    "outDir": "../dist/"
-  },
-  "references": [
-    { "path": "./src" }
-  ]
+    "outDir": "./dist/"
+  }
 }
