@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "sourceMap": true,
+    "declarationMap": true,
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es2018",
+    "moduleResolution": "node",
+    "types": ["node"],
+    "lib": ["es2019"],
+    "plugins": [
+      { "transform": "ts-transformer-imports" }
+    ],
+    "baseUrl": "./",
+    "paths": {
+      "@api-energy/*": ["src/*"],
+      "@api-energy/config/*": ["config/*"],
+      "@tests/*": ["tests/*"]
+    },
+    "rootDir": "src/",
+    "outDir": "../dist/"
+  },
+  "references": [
+    { "path": "./src" }
+  ]
+}

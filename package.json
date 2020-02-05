@@ -1,0 +1,25 @@
+{
+  "name": "nitrous",
+  "version": "1.0.0",
+  "description": "Modern caching framework for node",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VerdigrisTech/nitrous.git"
+  },
+  "keywords": [
+    "node",
+    "cache",
+    "caching",
+    "framework"
+  ],
+  "author": "Andrew Jo <andrew@verdigris.co>",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/VerdigrisTech/nitrous/issues"
+  },
+  "homepage": "https://github.com/VerdigrisTech/nitrous#readme"
+}
