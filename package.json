@@ -23,11 +23,13 @@
   },
   "homepage": "https://github.com/VerdigrisTech/nitrous#readme",
   "devDependencies": {
+    "@types/chai": "^4.2.8",
     "@types/memcached": "^2.2.6",
     "@types/mocha": "^7.0.1",
     "@types/node": "^13.7.0",
     "@types/node-cache": "^4.2.5",
     "@types/redis": "^2.8.14",
+    "chai": "^4.2.0",
     "memcached": "^2.2.2",
     "mocha": "^7.0.1",
     "redis": "^2.8.0",
