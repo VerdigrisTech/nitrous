@@ -1,6 +1,6 @@
-import { Driver } from "./driver";
+import Driver from "./driver";
 
-export class Cache {
+export default class Cache {
   protected driver: Driver;
 
   public constructor(driver: Driver) {
