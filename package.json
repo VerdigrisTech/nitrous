@@ -4,7 +4,8 @@
   "description": "Modern caching framework for node",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "lint": "eslint --ext .ts ."
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,8 @@
     "@types/node": "^13.7.0",
     "@types/node-cache": "^4.2.5",
     "@types/redis": "^2.8.14",
+    "@typescript-eslint/eslint-plugin": "^2.19.0",
+    "@typescript-eslint/parser": "^2.19.0",
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
