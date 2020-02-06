@@ -52,7 +52,7 @@ jobs:
     - name: Install dependencies
       run: npm ci
     - name: Run tests
-      run: nyc --reporter=lcov mocha
+      run: npx nyc --reporter=lcov mocha
     - name: Upload coverage report
       if: matrix.node == 12
       uses: codecov/codecov-action@v1
