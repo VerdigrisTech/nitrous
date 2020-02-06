@@ -38,6 +38,7 @@
     "eslint-plugin-mocha": "^6.2.2",
     "memcached": "^2.2.2",
     "mocha": "^7.0.1",
+    "nyc": "^15.0.0",
     "redis": "^2.8.0",
     "ts-node": "^8.6.2",
     "tsconfig-paths": "^3.9.0",
