@@ -4,7 +4,7 @@
   "description": "Modern caching framework for node",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "nyc mocha",
     "lint": "eslint --ext .ts ."
   },
   "repository": {
