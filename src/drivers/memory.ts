@@ -1,5 +1,5 @@
 import NodeCache from "node-cache";
-import { Driver } from "../driver";
+import Driver from "../driver";
 
 export class Memory extends Driver {
   protected cache: NodeCache;

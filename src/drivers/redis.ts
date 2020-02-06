@@ -1,7 +1,7 @@
 import { promisify } from "util";
 
 import redis from "redis";
-import { Driver } from "../driver";
+import Driver from "../driver";
 
 export class Redis extends Driver {
   protected client: redis.RedisClient;

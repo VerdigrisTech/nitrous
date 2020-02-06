@@ -1,7 +1,7 @@
 import { promisify } from "util";
 
 import _Memcached from "memcached";
-import { Driver } from "../driver";
+import Driver from "../driver";
 
 type CacheDumpData = _Memcached.CacheDumpData | _Memcached.CacheDumpData[];
 

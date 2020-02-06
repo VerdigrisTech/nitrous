@@ -1,7 +1,7 @@
 /**
  * Abstract base class required for implementing a cache driver.
  */
-export abstract class Driver {
+export default abstract class Driver {
   /**
    * Lists all keys.
    */
