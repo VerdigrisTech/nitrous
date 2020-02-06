@@ -14,11 +14,13 @@
     ],
     "baseUrl": "./",
     "paths": {
-      "@api-energy/*": ["src/*"],
-      "@api-energy/config/*": ["config/*"],
+      "@nitrous/*": ["src/*"],
       "@tests/*": ["tests/*"]
     },
     "rootDir": "src/",
     "outDir": "./dist/"
-  }
+  },
+  "references": [
+    { "path": "./src" }
+  ]
 }
