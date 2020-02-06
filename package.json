@@ -47,5 +47,6 @@
   },
   "dependencies": {
     "node-cache": "^5.1.0"
-  }
+  },
+  "types": "dist/index.d.ts"
 }
