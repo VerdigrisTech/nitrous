@@ -16,9 +16,7 @@
     "paths": {
       "@nitrous/*": ["src/*"],
       "@tests/*": ["tests/*"]
-    },
-    "rootDir": "src/",
-    "outDir": "./dist/"
+    }
   },
   "references": [
     { "path": "./src" }
