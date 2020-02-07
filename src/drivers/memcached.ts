@@ -8,11 +8,6 @@ type CacheDumpData = _Memcached.CacheDumpData | _Memcached.CacheDumpData[];
 export class Memcached extends Driver {
   protected client: _Memcached;
   protected _items: () => Promise<_Memcached.StatusData[]>;
-  protected _cachedump: (
-    server: string,
-    slabid: number,
-    number: number
-  ) => Promise<_Memcached.CacheDumpData | _Memcached.CacheDumpData[]>;
   protected _add: (
     key: string,
     value: any,
@@ -34,7 +29,6 @@ export class Memcached extends Driver {
     super();
     this.client = new _Memcached(location, options);
     this._items = promisify(this.client.items).bind(this.client);
-    this._cachedump = promisify(this.client.cachedump).bind(this.client);
     this._add = promisify(this.client.add).bind(this.client);
     this._get = promisify(this.client.get).bind(this.client);
     this._set = promisify(this.client.set).bind(this.client);
@@ -42,16 +36,52 @@ export class Memcached extends Driver {
     this._delete = promisify(this.client.del).bind(this.client);
   }
 
-  protected async cachedumpAll(): Promise<CacheDumpData[]> {
+  protected async cachedumpAll(): Promise<_Memcached.CacheDumpData[]> {
     const items = await this._items();
-    return await Promise.all(
-      items.flatMap(item => {
-        const keys = Object.keys(item).filter(key => key !== "server");
-        return keys.map(stats =>
-          this._cachedump(item.server, +stats, item[stats]["number"])
-        );
-      })
+    const cachedumps = await Promise.all(
+      items
+        .flatMap(item => {
+          const keys = Object.keys(item);
+
+          // Eject server from item keys.
+          keys.pop();
+
+          return keys.map(stats => {
+            return {
+              server: item.server,
+              slabid: +stats,
+              number: +item[stats]["number"]
+            };
+          });
+        })
+        .map(
+          ({ server, slabid, number }) =>
+            // Can't use async/await here due to weirdness with underlying memcached module.
+            // We need the callback and shallow copy the results or we'll just end up with
+            // undefined objects.
+            new Promise((resolve, reject) => {
+              this.client.cachedump(
+                server,
+                slabid,
+                number,
+                (err, cachedump) => {
+                  if (err) {
+                    return reject(err);
+                  }
+
+                  if (Array.isArray(cachedump)) {
+                    return resolve(
+                      cachedump.map(dump => Object.assign({}, dump))
+                    );
+                  }
+
+                  resolve(Object.assign({}, cachedump));
+                }
+              );
+            })
+        )
     );
+    return cachedumps.flat();
   }
 
   public async keys(): Promise<string[]> {
@@ -63,29 +93,42 @@ export class Memcached extends Driver {
     // Add command in Memcached returns false if the key already exists. The
     // lifetime is set to Unix epoch of 2678400 (Jan 31, 1970) so that the key
     // will immediately be invalidated if it is added.
-    return !(await this._add(key, 0, 2678400));
+    try {
+      const response = await this._add(key, 0, 2678400);
+      return !(response);
+    } catch {
+      // Underlying memcached library raises "Item is not stored" error.
+      return false;
+    }
   }
 
   public async get(key: string): Promise<string> {
     return await this._get(key);
   }
 
-  public async set(key: string, value: any, ttl?: number): Promise<boolean> {
-    return ttl == null
-      ? await this._set(key, value, 0)
-      : await this._set(key, value, ttl);
+  public async set(key: string, value: any, ttl = 0): Promise<boolean> {
+    return await this._set(key, value, ttl);
   }
 
   public async ttl(key: string): Promise<number> {
     const responses = await this.cachedumpAll();
     const response = responses.find(
-      (response: _Memcached.CacheDumpData) => response.key === key
+      (response: _Memcached.CacheDumpData) => response?.key === key
     ) as _Memcached.CacheDumpData;
-    return response != null ? response.s : -1;
+
+    if (response == null) {
+      return -1;
+    }
+
+    return response.s > 0 ? response.s - (Date.now() / 1000) | 0 : -1;
   }
 
   public async expire(key: string, ttl: number): Promise<boolean> {
     try {
+      if ((await this.has(key)) === false) {
+        return false;
+      }
+
       await this._touch(key, ttl);
       return true;
     } catch {
