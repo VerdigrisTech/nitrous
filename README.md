@@ -1,4 +1,4 @@
-# nitrous.js
+# ![nitrous.js][nitrousjs]
 
 ![Version][version-badge]
 [![Build Status][build-status-badge]][github-workflows-url]
@@ -27,6 +27,7 @@ const cache = new Cache(inMemoryDriver);
 
 Copyright © 2020 [Verdigris Technologies, Inc.][verdigris-url] All rights reserved.
 
+[nitrousjs]: https://verdigris.s3-us-west-2.amazonaws.com/nitrousjs.svg
 [version-badge]: https://img.shields.io/github/package-json/v/verdigristech/nitrous?style=for-the-badge
 [build-status-badge]: https://img.shields.io/github/workflow/status/verdigristech/nitrous/Continuous%20Integration?logo=github&style=for-the-badge
 [github-workflows-url]: https://github.com/VerdigrisTech/nitrous/actions
