@@ -1,10 +1,11 @@
 import Driver from "./driver";
+import { Memory } from "./drivers/memory";
 
 export default class Cache {
   protected driver: Driver;
 
-  public constructor(driver: Driver) {
-    this.driver = driver;
+  public constructor(driver?: Driver) {
+    this.driver = driver ?? new Memory();
   }
 
   public async keys(): Promise<string[]> {
