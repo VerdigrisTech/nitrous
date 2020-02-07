@@ -33,13 +33,13 @@ export class Memcached extends Driver {
   ) {
     super();
     this.client = new _Memcached(location, options);
-    this._items = promisify(this.client.items);
-    this._cachedump = promisify(this.client.cachedump);
-    this._add = promisify(this.client.add);
-    this._get = promisify(this.client.get);
-    this._set = promisify(this.client.set);
-    this._touch = promisify(this.client.touch);
-    this._delete = promisify(this.client.del);
+    this._items = promisify(this.client.items).bind(this.client);
+    this._cachedump = promisify(this.client.cachedump).bind(this.client);
+    this._add = promisify(this.client.add).bind(this.client);
+    this._get = promisify(this.client.get).bind(this.client);
+    this._set = promisify(this.client.set).bind(this.client);
+    this._touch = promisify(this.client.touch).bind(this.client);
+    this._delete = promisify(this.client.del).bind(this.client);
   }
 
   protected async cachedumpAll(): Promise<CacheDumpData[]> {
