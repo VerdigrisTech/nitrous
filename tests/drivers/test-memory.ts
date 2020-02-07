@@ -16,6 +16,10 @@ describe("Memory Driver", function () {
     cache = new Cache(driver);
   });
 
+  afterEach(async function () {
+    await cache.close();
+  });
+
   describe("#keys", function () {
     it("should return all keys in cache", async function () {
       await Promise.all([
@@ -141,10 +145,11 @@ describe("Memory Driver", function () {
   });
 
   describe("#close", function () {
-    it("should end cache TTL timer and remove all in-memory keys", async function () {
+    it("should clear cache TTL timers", async function () {
+      await cache.set("foo", "foo");
       const actual = await cache.close();
       expect(actual).to.be.true;
-      expect(await cache.keys()).to.be.empty;
+      expect(await cache.keys()).to.have.length(0);
     });
   });
 });
