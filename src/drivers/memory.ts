@@ -36,4 +36,13 @@ export class Memory extends Driver {
   public async delete(keys: string | string[]): Promise<number> {
     return this.cache.del(keys);
   }
+
+  public async close(): Promise<boolean> {
+    try {
+      this.cache.close();
+      return true;
+    } catch {
+      return false;
+    }
+  }
 }

@@ -101,4 +101,13 @@ export class Memcached extends Driver {
 
     return (await this._delete(keys)) ? 1 : 0;
   }
+
+  public async close(): Promise<boolean> {
+    try {
+      this.client.end();
+      return true;
+    } catch {
+      return false;
+    }
+  }
 }

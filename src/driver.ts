@@ -49,4 +49,9 @@ export default abstract class Driver {
    * @param key {string}
    */
   public abstract async delete(keys: string | string[]): Promise<number>;
+
+  /**
+   * Closes connection or ends cache timeouts depending on underlying driver.
+   */
+  public abstract async close(): Promise<boolean>;
 }

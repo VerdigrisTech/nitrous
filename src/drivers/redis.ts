@@ -62,4 +62,9 @@ export class Redis extends Driver {
   public async delete(keys: string | string[]): Promise<number> {
     return await this._delete(keys);
   }
+
+  public async close(): Promise<boolean> {
+    const quit = promisify(this.client.quit);
+    return await quit() === "OK";
+  }
 }

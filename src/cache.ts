@@ -35,4 +35,8 @@ export default class Cache {
   public async delete(keys: string | string[]): Promise<number> {
     return await this.driver.delete(keys);
   }
+
+  public async close(): Promise<boolean> {
+    return await this.driver.close();
+  }
 }

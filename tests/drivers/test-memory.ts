@@ -139,4 +139,12 @@ describe("Memory Driver", function () {
       expect(await cache.get("bar")).to.be.undefined;
     });
   });
+
+  describe("#close", function () {
+    it("should end cache TTL timer and remove all in-memory keys", async function () {
+      const actual = await cache.close();
+      expect(actual).to.be.true;
+      expect(await cache.keys()).to.be.empty;
+    });
+  });
 });
