@@ -26,7 +26,8 @@ export class Memory extends Driver {
   }
 
   public async ttl(key: string): Promise<number> {
-    return this.cache.getTtl(key);
+    const ttl = this.cache.getTtl(key);
+    return ttl === 0 ? 0 : (this.cache.getTtl(key) - Date.now()) / 1000;
   }
 
   public async expire(key: string, ttl: number): Promise<boolean> {

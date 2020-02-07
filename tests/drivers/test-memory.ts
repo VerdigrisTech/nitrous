@@ -96,10 +96,9 @@ describe("Memory Driver", function () {
 
   describe("#ttl", function () {
     it("should return the TTL value of the given key if set", async function () {
-      const now = Date.now();
       await cache.set("foo", "foo", 2);
       const actual = await cache.ttl("foo");
-      expect(actual).to.equal(now + 2000);
+      expect(actual).to.be.closeTo(2, 0.001);
     });
 
     it("should return 0 if TTL for the key is not set", async function () {
@@ -111,10 +110,9 @@ describe("Memory Driver", function () {
 
   describe("#expire", function () {
     it("should update the TTL with new value in seconds", async function () {
-      const now = Date.now();
       await cache.set("foo", "foo", 1);
       await cache.expire("foo", 2);
-      expect(await cache.ttl("foo")).to.be.closeTo(now + 2000, 1);
+      expect(await cache.ttl("foo")).to.be.closeTo(2, 0.001);
     });
 
     it("should return false when the key does not exist", async function () {
