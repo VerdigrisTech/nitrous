@@ -1,6 +1,6 @@
 # BSD 3-Clause License
 
-Copyright (c) 2020, Verdigris Technologies, Inc.
+Copyright © 2020, [Verdigris Technologies, Inc.](https://verdigris.co)
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
