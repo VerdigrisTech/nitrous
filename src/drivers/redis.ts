@@ -21,14 +21,14 @@ export class Redis extends Driver {
   public constructor(options?: redis.ClientOpts) {
     super();
     this.client = redis.createClient(options);
-    this._keys = promisify(this.client.keys);
-    this._exists = promisify(this.client.exists);
-    this._get = promisify(this.client.get);
-    this._set = promisify(this.client.set);
-    this._setex = promisify(this.client.setex);
-    this._ttl = promisify(this.client.ttl);
-    this._expire = promisify(this.client.expire);
-    this._delete = promisify(this.client.del);
+    this._keys = promisify(this.client.keys).bind(this.client);
+    this._exists = promisify(this.client.exists).bind(this.client);
+    this._get = promisify(this.client.get).bind(this.client);
+    this._set = promisify(this.client.set).bind(this.client);
+    this._setex = promisify(this.client.setex).bind(this.client);
+    this._ttl = promisify(this.client.ttl).bind(this.client);
+    this._expire = promisify(this.client.expire).bind(this.client);
+    this._delete = promisify(this.client.del).bind(this.client);
   }
 
   public async keys(): Promise<string[]> {
@@ -64,7 +64,7 @@ export class Redis extends Driver {
   }
 
   public async close(): Promise<boolean> {
-    const quit = promisify(this.client.quit);
+    const quit = promisify(this.client.quit).bind(this.client);
     return await quit() === "OK";
   }
 }
