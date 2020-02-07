@@ -39,6 +39,7 @@ export class Memory extends Driver {
 
   public async close(): Promise<boolean> {
     try {
+      this.cache.flushAll();
       this.cache.close();
       return true;
     } catch {
