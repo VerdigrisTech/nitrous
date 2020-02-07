@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha",
     "coverage": "nyc mocha",
-    "lint": "eslint --ext .ts ."
+    "lint": "eslint --ext .ts .",
+    "build": "tsc -b src/"
   },
   "repository": {
     "type": "git",
