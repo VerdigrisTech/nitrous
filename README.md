@@ -7,6 +7,22 @@
 
 Modern caching library for node.
 
+## Usage
+
+To get started, run:
+
+```bash
+npm install --save @verdigristech/nitrous
+```
+
+Then in your code, import the package:
+
+```javascript
+const { Cache, drivers: { Memory } } = require('@verdigristech/nitrous');
+const inMemoryDriver = new Memory();
+const cache = new Cache(inMemoryDriver);
+```
+
 [version-badge]: https://img.shields.io/github/package-json/v/verdigristech/nitrous?style=for-the-badge
 [build-status-badge]: https://img.shields.io/github/workflow/status/verdigristech/nitrous/Continuous%20Integration?logo=github&style=for-the-badge
 [github-workflows-url]: https://github.com/VerdigrisTech/nitrous/actions
