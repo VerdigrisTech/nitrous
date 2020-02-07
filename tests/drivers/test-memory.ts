@@ -101,10 +101,10 @@ describe("Memory Driver", function () {
       expect(actual).to.be.closeTo(2, 0.001);
     });
 
-    it("should return 0 if TTL for the key is not set", async function () {
+    it("should return -1 if TTL for the key is not set", async function () {
       await cache.set("foo", "foo");
       const actual = await cache.ttl("foo");
-      expect(actual).to.equal(0);
+      expect(actual).to.equal(-1);
     });
   });
 
