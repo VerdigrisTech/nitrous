@@ -18,9 +18,65 @@ npm install --save @verdigristech/nitrous
 Then in your code, import the package:
 
 ```javascript
-const { Cache, drivers: { Memory } } = require('@verdigristech/nitrous');
-const inMemoryDriver = new Memory();
-const cache = new Cache(inMemoryDriver);
+const { Cache } = require('@verdigristech/nitrous');
+const cache = new Cache();
+```
+
+By default, **nitrous** will use in-memory driver that uses [node-cache][node-cache-url]
+as an underlying cache store and does not ship with third-party caching client libraries
+such as [redis][redis-url] or [memcached][memcached-url] modules to reduce the distribution
+size of the library.
+
+## External Cache Drivers
+
+### Redis
+
+To use Redis driver, you must first install the [redis][redis-url] module:
+
+```bash
+npm install --save redis
+```
+
+Then import the Redis driver and pass it to Cache constructor:
+
+```javascript
+const { Cache, drivers: { Redis } } = require('@verdigristech/nitrous');
+const redisOptions = {
+  host: '127.0.0.1'
+};
+const cache = new Cache(new Redis(redisOptions));
+```
+
+### Memcached
+
+Using the Memcached driver is similar to Redis example. First install the
+[memcached][memcached-url] module:
+
+```bash
+npm install --save memcached
+```
+
+Then import the Memcached driver:
+
+```javascript
+const { Cache, drivers: { Memcached } } = require('@verdigristech/nitrous');
+const memcachedOptions = {
+  poolSize: 10
+};
+const cache = new Cache(new Memcached('127.0.0.1', memcachedOptions));
+```
+
+## TypeScript
+
+This library was written entirely in TypeScript and you will be able to import this library without
+having to install typings (e.g. `@types/<package>`).
+
+**Example:**
+
+```typescript
+import { Cache, drivers } from "@verdigristech/nitrous";
+const driver = new drivers.Redis({ host: '127.0.0.1' });
+const cache = new Cache(driver);
 ```
 
 ---
@@ -35,3 +91,6 @@ Copyright © 2020 [Verdigris Technologies, Inc.][verdigris-url] All rights reser
 [codecov-url]: https://codecov.io/gh/VerdigrisTech/nitrous
 [license-badge]: https://img.shields.io/github/license/verdigristech/nitrous?style=for-the-badge
 [verdigris-url]: https://verdigris.co
+[node-cache-url]: https://www.npmjs.com/package/node-cache
+[redis-url]: https://www.npmjs.com/package/redis
+[memcached-url]: https://www.npmjs.com/package/memcached
