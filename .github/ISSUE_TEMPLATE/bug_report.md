@@ -2,37 +2,44 @@
 name: Bug report
 about: Create a report to help us improve
 title: ''
-labels: ''
+labels: bug
 assignees: ''
 
 ---
 
-**Describe the bug**
+## Description
+
 A clear and concise description of what the bug is.
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+## Expected behavior
 
-**Expected behavior**
 A clear and concise description of what you expected to happen.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+## Actual behavior
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+A clear and concise description of what actually happens instead.
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+## Steps to reproduce
 
-**Additional context**
-Add any other context about the problem here.
+Steps to reproduce the behavior:
+
+1. Import '...'
+2. Call method '....'
+3. Throws error
+
+## Environment
+
+ - nitrous.js version: vX.Y.Z
+ - Node.js version: vX.Y.Z
+ - redis / memcached version (if applicable): vX.Y.Z
+ - OS (select all that apply):
+   - [ ] Windows
+   - [ ] macOS
+   - [ ] Linux
+   - [ ] FreeBSD/OpenBSD/NetBSD etc.
+   - [ ] Other
+
+---
+
+- [ ] I have read the [Contribution Guideline](https://github.com/VerdigrisTech/nitrous/blob/master/CONTRIBUTING.md)
+- [ ] I have searched the [issues](https://github.com/VerdigrisTech/nitrous/labels/bug) and found no duplicate bug reports
