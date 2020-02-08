@@ -18,7 +18,10 @@
     "node",
     "cache",
     "caching",
-    "framework"
+    "framework",
+    "redis",
+    "memcached",
+    "typescript"
   ],
   "author": "Andrew Jo <andrew@verdigris.co> (https://verdigris.co)",
   "license": "BSD-3-Clause",
