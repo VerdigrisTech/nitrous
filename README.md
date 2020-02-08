@@ -18,7 +18,7 @@ npm install --save @verdigristech/nitrous
 Then in your code, import the package:
 
 ```javascript
-const { Cache } = require('@verdigristech/nitrous');
+const { Cache } = require("@verdigristech/nitrous");
 const cache = new Cache();
 ```
 
@@ -40,9 +40,12 @@ npm install --save redis
 Then import the Redis driver and pass it to Cache constructor:
 
 ```javascript
-const { Cache, drivers: { Redis } } = require('@verdigristech/nitrous');
+const {
+  Cache,
+  drivers: { Redis }
+} = require("@verdigristech/nitrous");
 const redisOptions = {
-  host: '127.0.0.1'
+  host: "127.0.0.1"
 };
 const cache = new Cache(new Redis(redisOptions));
 ```
@@ -59,11 +62,14 @@ npm install --save memcached
 Then import the Memcached driver:
 
 ```javascript
-const { Cache, drivers: { Memcached } } = require('@verdigristech/nitrous');
+const {
+  Cache,
+  drivers: { Memcached }
+} = require("@verdigristech/nitrous");
 const memcachedOptions = {
   poolSize: 10
 };
-const cache = new Cache(new Memcached('127.0.0.1', memcachedOptions));
+const cache = new Cache(new Memcached("127.0.0.1", memcachedOptions));
 ```
 
 > **NOTE:** Anything other than Memcached version 1.5.0 seems to cause intermittent issues that
@@ -79,13 +85,17 @@ having to install typings (e.g. `@types/<package>`).
 
 ```typescript
 import { Cache, drivers } from "@verdigristech/nitrous";
-const driver = new drivers.Redis({ host: '127.0.0.1' });
+const driver = new drivers.Redis({ host: "127.0.0.1" });
 const cache = new Cache(driver);
 ```
 
 ---
 
 Copyright © 2020 [Verdigris Technologies, Inc.][verdigris-url] All rights reserved.
+
+<small>Verdigris Technologies Inc. assumes NO RESPONSIBILITY OR LIABILITY UNDER ANY CIRCUMSTANCES
+for usage of this software. See the [LICENSE.md](LICENSE.md) file for detailed legal
+information.</small>
 
 [nitrousjs]: https://verdigris.s3-us-west-2.amazonaws.com/nitrousjs.svg
 [version-badge]: https://img.shields.io/github/package-json/v/verdigristech/nitrous?style=for-the-badge
