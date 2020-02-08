@@ -1,6 +1,6 @@
 /**
  * @packageDocumentation
- * @module @verdigristech/nitrous
+ * @module @verdigris/nitrous
  */
 
 export { default as Cache } from "./cache";

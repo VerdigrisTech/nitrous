@@ -1,5 +1,5 @@
 {
-  "name": "@verdigristech/nitrous",
+  "name": "@verdigris/nitrous",
   "version": "0.1.0",
   "description": "Modern caching framework for node",
   "main": "dist/index.js",

@@ -1,6 +1,6 @@
 /**
  * @packageDocumentation
- * @module @verdigristech/nitrous/drivers
+ * @module @verdigris/nitrous/drivers
  */
 
 import { promisify } from "util";

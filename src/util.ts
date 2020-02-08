@@ -1,6 +1,6 @@
 /**
  * @packageDocumentation
- * @module @verdigristech/nitrous/util
+ * @module @verdigris/nitrous/util
  */
 
 type List<T> = ArrayLike<T>;

@@ -12,13 +12,13 @@ Modern caching library for node.
 To get started, run:
 
 ```bash
-npm install --save @verdigristech/nitrous
+npm install --save @verdigris/nitrous
 ```
 
 Then in your code, import the package:
 
 ```javascript
-const { Cache } = require("@verdigristech/nitrous");
+const { Cache } = require("@verdigris/nitrous");
 const cache = new Cache();
 ```
 
@@ -43,7 +43,7 @@ Then import the Redis driver and pass it to Cache constructor:
 const {
   Cache,
   drivers: { Redis }
-} = require("@verdigristech/nitrous");
+} = require("@verdigris/nitrous");
 const redisOptions = {
   host: "127.0.0.1"
 };
@@ -65,7 +65,7 @@ Then import the Memcached driver:
 const {
   Cache,
   drivers: { Memcached }
-} = require("@verdigristech/nitrous");
+} = require("@verdigris/nitrous");
 const memcachedOptions = {
   poolSize: 10
 };
@@ -84,7 +84,7 @@ having to install typings (e.g. `@types/<package>`).
 **Example:**
 
 ```typescript
-import { Cache, drivers } from "@verdigristech/nitrous";
+import { Cache, drivers } from "@verdigris/nitrous";
 const driver = new drivers.Redis({ host: "127.0.0.1" });
 const cache = new Cache(driver);
 ```
