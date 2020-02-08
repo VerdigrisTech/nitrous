@@ -1,6 +1,7 @@
 # ![nitrous.js][nitrousjs]
 
-![Version][version-badge]
+[![Version][version-badge]][npm-url]
+[![Node Version][node-badge]][node-url]
 [![Build Status][build-status-badge]][github-workflows-url]
 [![Code Coverage][codecov-badge]][codecov-url]
 [![License][license-badge]](LICENSE.md)
@@ -98,7 +99,10 @@ for usage of this software. See the [LICENSE.md](LICENSE.md) file for detailed l
 information.</sub>
 
 [nitrousjs]: https://verdigris.s3-us-west-2.amazonaws.com/nitrousjs.svg
-[version-badge]: https://img.shields.io/github/package-json/v/verdigristech/nitrous?style=for-the-badge
+[npm-url]: https://www.npmjs.com/package/@verdigris/nitrous?activeTab=versions
+[version-badge]: https://img.shields.io/npm/v/@verdigris/nitrous?style=for-the-badge
+[node-badge]: https://img.shields.io/node/v/@verdigris/nitrous?style=for-the-badge
+[node-url]: https://nodejs.org/en/about/releases/
 [build-status-badge]: https://img.shields.io/github/workflow/status/verdigristech/nitrous/Continuous%20Integration?logo=github&style=for-the-badge
 [github-workflows-url]: https://github.com/VerdigrisTech/nitrous/actions
 [codecov-badge]: https://img.shields.io/codecov/c/github/verdigristech/nitrous?logo=codecov&style=for-the-badge
