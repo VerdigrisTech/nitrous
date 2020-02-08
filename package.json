@@ -23,7 +23,7 @@
   "author": "Andrew Jo <andrew@verdigris.co> (https://verdigris.co)",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/VerdigrisTech/nitrous/issues"
+    "url": "https://github.com/VerdigrisTech/nitrous/labels/bug"
   },
   "homepage": "https://github.com/VerdigrisTech/nitrous#readme",
   "engines": {
