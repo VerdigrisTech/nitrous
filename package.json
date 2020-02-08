@@ -19,7 +19,7 @@
     "caching",
     "framework"
   ],
-  "author": "Andrew Jo <andrew@verdigris.co>",
+  "author": "Andrew Jo <andrew@verdigris.co> (https://verdigris.co)",
   "license": "BSD-3-Clause",
   "bugs": {
     "url": "https://github.com/VerdigrisTech/nitrous/issues"
