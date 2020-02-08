@@ -2,6 +2,7 @@ import { promisify } from "util";
 
 import _Memcached from "memcached";
 import Driver from "../driver";
+import { flatten } from "../util";
 
 type CacheDumpData = _Memcached.CacheDumpData | _Memcached.CacheDumpData[];
 
@@ -38,51 +39,44 @@ export class Memcached extends Driver {
 
   protected async cachedumpAll(): Promise<_Memcached.CacheDumpData[]> {
     const items = await this._items();
-    const cachedumps = await Promise.all(
-      items
-        .map(item => {
-          const keys = Object.keys(item);
+    const cachedumpQueryArgs = flatten(
+      items.map(item => {
+        const keys = Object.keys(item);
 
-          // Eject server from item keys.
-          keys.pop();
+        // Eject server from item keys.
+        keys.pop();
 
-          return keys.map(stats => {
-            return {
-              server: item.server,
-              slabid: +stats,
-              number: +item[stats]["number"]
-            };
-          });
-        })
-        .flat()
-        .map(
-          ({ server, slabid, number }) =>
-            // Can't use async/await here due to weirdness with underlying memcached module.
-            // We need the callback and shallow copy the results or we'll just end up with
-            // undefined objects.
-            new Promise((resolve, reject) => {
-              this.client.cachedump(
-                server,
-                slabid,
-                number,
-                (err, cachedump) => {
-                  if (err) {
-                    return reject(err);
-                  }
-
-                  if (Array.isArray(cachedump)) {
-                    return resolve(
-                      cachedump.map(dump => Object.assign({}, dump))
-                    );
-                  }
-
-                  resolve(Object.assign({}, cachedump));
-                }
-              );
-            })
-        )
+        return keys.map(stats => {
+          return {
+            server: item.server,
+            slabid: +stats,
+            number: +item[stats]["number"]
+          };
+        });
+      })
     );
-    return cachedumps.flat();
+    const cachedumps = await Promise.all(
+      cachedumpQueryArgs.map(
+        ({ server, slabid, number }) =>
+          // Can't use async/await here due to weirdness with underlying memcached module.
+          // We need the callback and shallow copy the results or we'll just end up with
+          // undefined objects.
+          new Promise((resolve: (value: CacheDumpData) => void, reject) => {
+            this.client.cachedump(server, slabid, number, (err, cachedump) => {
+              if (err) {
+                return reject(err);
+              }
+
+              if (Array.isArray(cachedump)) {
+                return resolve(cachedump.map(dump => Object.assign({}, dump)));
+              }
+
+              resolve(Object.assign({}, cachedump));
+            });
+          })
+      )
+    );
+    return flatten(cachedumps);
   }
 
   public async keys(): Promise<string[]> {
@@ -96,7 +90,7 @@ export class Memcached extends Driver {
     // will immediately be invalidated if it is added.
     try {
       const response = await this._add(key, "INVALID", 2678400);
-      return !(response);
+      return !response;
     } catch (err) {
       if (err.message === "Item is not stored") {
         return true;
