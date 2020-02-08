@@ -37,8 +37,8 @@ jobs:
         uses: primer/publish@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_REGISTRY_URL: npm.pkg.github.com
-          args: '--dry-run'
+          NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          args: '--dry-run -- --registry=https://npm.pkg.github.com/'
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
         with:
