@@ -44,6 +44,8 @@
     "redis": "^2.8.0",
     "ts-node": "^8.6.2",
     "tsconfig-paths": "^3.9.0",
+    "typedoc": "^0.16.9",
+    "typedoc-plugin-external-module-name": "^3.0.0",
     "typescript": "^3.7.5"
   },
   "dependencies": {
