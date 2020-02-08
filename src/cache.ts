@@ -5,8 +5,9 @@ export default class Cache {
   protected driver: Driver;
 
   /**
-   * Instantiate a new cache object.
-   * @param {Driver} driver - an instance of cache driver
+   * Instantiate a new Cache with given driver. The `driver` is optional; if unspecified, defaults
+   * to [[Memory]] driver.
+   * @param {Driver} [driver] - an instance of cache driver
    */
   public constructor(driver?: Driver) {
     this.driver = driver ?? new Memory();
