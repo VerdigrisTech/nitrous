@@ -65,6 +65,6 @@ export class Redis extends Driver {
 
   public async close(): Promise<boolean> {
     const quit = promisify(this.client.quit).bind(this.client);
-    return await quit() === "OK";
+    return (await quit()) === "OK";
   }
 }
