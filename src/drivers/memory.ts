@@ -1,3 +1,8 @@
+/**
+ * @packageDocumentation
+ * @module @verdigristech/nitrous/drivers
+ */
+
 import NodeCache from "node-cache";
 import Driver from "../driver";
 

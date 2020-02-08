@@ -1,3 +1,8 @@
+/**
+ * @packageDocumentation
+ * @module @verdigristech/nitrous/drivers
+ */
+
 import { promisify } from "util";
 
 import redis from "redis";

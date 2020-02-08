@@ -1,3 +1,8 @@
+/**
+ * @packageDocumentation
+ * @module @verdigristech/nitrous/util
+ */
+
 type List<T> = ArrayLike<T>;
 type Many<T> = T | ReadonlyArray<T>;
 

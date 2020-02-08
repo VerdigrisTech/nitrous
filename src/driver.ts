@@ -1,4 +1,9 @@
 /**
+ * @packageDocumentation
+ * @module @verdigristech/nitrous
+ */
+
+/**
  * Abstract base class required for implementing a cache driver.
  */
 export default abstract class Driver {

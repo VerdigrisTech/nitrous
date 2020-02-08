@@ -1,3 +1,8 @@
+/**
+ * @packageDocumentation
+ * @module @verdigristech/nitrous
+ */
+
 import Driver from "./driver";
 import { Memory } from "./drivers/memory";
 
