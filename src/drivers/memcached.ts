@@ -94,11 +94,15 @@ export class Memcached extends Driver {
     // lifetime is set to Unix epoch of 2678400 (Jan 31, 1970) so that the key
     // will immediately be invalidated if it is added.
     try {
-      const response = await this._add(key, 0, 2678400);
+      const response = await this._add(key, "INVALID", 2678400);
       return !(response);
-    } catch {
-      // Underlying memcached library raises "Item is not stored" error.
-      return false;
+    } catch (err) {
+      if (err.message === "Item is not stored") {
+        return true;
+      }
+
+      // Rethrow any other error.
+      throw err;
     }
   }
 
@@ -120,7 +124,7 @@ export class Memcached extends Driver {
       return -1;
     }
 
-    return response.s > 0 ? response.s - (Date.now() / 1000) | 0 : -1;
+    return response.s > 0 ? response.s - ((Date.now() / 1000) | 0) : -1;
   }
 
   public async expire(key: string, ttl: number): Promise<boolean> {
