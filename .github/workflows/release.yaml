@@ -28,17 +28,13 @@ jobs:
       - name: Build nitrous.js
         run: npm run build
       - name: Publish package to npm
-        uses: primer/publish@master
+        run: npm publish --dry-run --access public
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-          args: '--dry-run'
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       - name: Publish package to GitHub Packages
-        uses: primer/publish@master
+        run: npm publish --dry-run --registry=https://npm.pkg.github.com/
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          args: '--dry-run -- --registry=https://npm.pkg.github.com/'
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
         with:
