@@ -40,7 +40,7 @@ export class Memcached extends Driver {
     const items = await this._items();
     const cachedumps = await Promise.all(
       items
-        .flatMap(item => {
+        .map(item => {
           const keys = Object.keys(item);
 
           // Eject server from item keys.
@@ -54,6 +54,7 @@ export class Memcached extends Driver {
             };
           });
         })
+        .flat()
         .map(
           ({ server, slabid, number }) =>
             // Can't use async/await here due to weirdness with underlying memcached module.
