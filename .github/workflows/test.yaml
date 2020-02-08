@@ -8,16 +8,13 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-18.04
-    strategy:
-      matrix:
-        node: ['8', '10', '12']
     steps:
     - name: Checkout project
       uses: actions/checkout@v2
-    - name: Setup Node.js ${{ matrix.node }}
+    - name: Setup Node.js 12
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node }}
+        node-version: 12
     - name: Cache dependencies
       uses: actions/cache@v1
       with:
