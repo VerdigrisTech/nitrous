@@ -25,6 +25,9 @@
     "url": "https://github.com/VerdigrisTech/nitrous/issues"
   },
   "homepage": "https://github.com/VerdigrisTech/nitrous#readme",
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "devDependencies": {
     "@types/chai": "^4.2.8",
     "@types/memcached": "^2.2.6",
