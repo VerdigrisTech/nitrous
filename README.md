@@ -93,9 +93,9 @@ const cache = new Cache(driver);
 
 Copyright © 2020 [Verdigris Technologies, Inc.][verdigris-url] All rights reserved.
 
-<small>Verdigris Technologies Inc. assumes NO RESPONSIBILITY OR LIABILITY UNDER ANY CIRCUMSTANCES
+<sub>Verdigris Technologies Inc. assumes NO RESPONSIBILITY OR LIABILITY UNDER ANY CIRCUMSTANCES
 for usage of this software. See the [LICENSE.md](LICENSE.md) file for detailed legal
-information.</small>
+information.</sub>
 
 [nitrousjs]: https://verdigris.s3-us-west-2.amazonaws.com/nitrousjs.svg
 [version-badge]: https://img.shields.io/github/package-json/v/verdigristech/nitrous?style=for-the-badge
