@@ -42,6 +42,7 @@
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-mocha": "^6.2.2",
+    "husky": "^4.2.1",
     "lint-staged": "^10.0.7",
     "memcached": "^2.2.2",
     "mocha": "^7.0.1",
@@ -57,5 +58,10 @@
   "dependencies": {
     "node-cache": "^5.1.0"
   },
-  "types": "dist/index.d.ts"
+  "types": "dist/index.d.ts",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }
