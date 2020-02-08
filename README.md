@@ -66,6 +66,10 @@ const memcachedOptions = {
 const cache = new Cache(new Memcached('127.0.0.1', memcachedOptions));
 ```
 
+> **NOTE:** Anything other than Memcached version 1.5.0 seems to cause intermittent issues that
+> relies on calls to `stats cachedump`. If this is an issue, please report this
+> [issue][memcached-issue-url] to the upstream library for [memcached][memcached-url].
+
 ## TypeScript
 
 This library was written entirely in TypeScript and you will be able to import this library without
@@ -94,3 +98,4 @@ Copyright © 2020 [Verdigris Technologies, Inc.][verdigris-url] All rights reser
 [node-cache-url]: https://www.npmjs.com/package/node-cache
 [redis-url]: https://www.npmjs.com/package/redis
 [memcached-url]: https://www.npmjs.com/package/memcached
+[memcached-issue-url]: https://github.com/3rd-Eden/memcached/issues
