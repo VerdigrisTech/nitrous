@@ -1,4 +1,4 @@
-# ![nitrous.js][nitrousjs]
+# [![nitrous.js][nitrousjs]][nitrous-url]
 
 [![Version][version-badge]][npm-url]
 [![Node Version][node-badge]][node-url]
@@ -77,6 +77,10 @@ const cache = new Cache(new Memcached("127.0.0.1", memcachedOptions));
 > relies on calls to `stats cachedump`. If this is an issue, please report this
 > [issue][memcached-issue-url] to the upstream library for [memcached][memcached-url].
 
+## API Documentation
+
+Detailed API documentation can be found [here][nitrous-url].
+
 ## TypeScript
 
 This library was written entirely in TypeScript and you will be able to import this library without
@@ -98,6 +102,7 @@ Copyright © 2020 [Verdigris Technologies, Inc.][verdigris-url] All rights reser
 for usage of this software. See the [LICENSE.md](LICENSE.md) file for detailed legal
 information.</sub>
 
+[nitrous-url]: https://verdigristech.github.io/nitrous/
 [nitrousjs]: https://verdigris.s3-us-west-2.amazonaws.com/nitrousjs.svg
 [npm-url]: https://www.npmjs.com/package/@verdigris/nitrous?activeTab=versions
 [version-badge]: https://img.shields.io/npm/v/@verdigris/nitrous?style=for-the-badge
