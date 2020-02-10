@@ -1,0 +1,232 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@verdigris/nitrous</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">@verdigris/nitrous</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>@verdigris/nitrous</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#img-srchttpsverdigriss3-us-west-2amazonawscomnitrousjssvg-altnitrousjs" id="img-srchttpsverdigriss3-us-west-2amazonawscomnitrousjssvg-altnitrousjs" style="color: inherit; text-decoration: none;">
+					<h1><img src="https://verdigris.s3-us-west-2.amazonaws.com/nitrousjs.svg" alt="nitrous.js"></h1>
+				</a>
+				<p><a href="https://www.npmjs.com/package/@verdigris/nitrous?activeTab=versions"><img src="https://img.shields.io/npm/v/@verdigris/nitrous?style=for-the-badge" alt="Version"></a>
+					<a href="https://nodejs.org/en/about/releases/"><img src="https://img.shields.io/node/v/@verdigris/nitrous?style=for-the-badge" alt="Node Version"></a>
+					<a href="https://github.com/VerdigrisTech/nitrous/actions"><img src="https://img.shields.io/github/workflow/status/verdigristech/nitrous/Continuous%20Integration?logo=github&style=for-the-badge" alt="Build Status"></a>
+					<a href="https://codecov.io/gh/VerdigrisTech/nitrous"><img src="https://img.shields.io/codecov/c/github/verdigristech/nitrous?logo=codecov&style=for-the-badge" alt="Code Coverage"></a>
+				<a href="LICENSE.md"><img src="https://img.shields.io/github/license/verdigristech/nitrous?style=for-the-badge" alt="License"></a></p>
+				<p>Modern caching library for node.</p>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<p>To get started, run:</p>
+				<pre><code class="language-bash">npm install --save @verdigris/nitrous</code></pre>
+				<p>Then in your code, import the package:</p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> { Cache } = <span class="hljs-built_in">require</span>(<span class="hljs-string">"@verdigris/nitrous"</span>);
+<span class="hljs-keyword">const</span> cache = <span class="hljs-keyword">new</span> Cache();</code></pre>
+				<p>By default, <strong>nitrous</strong> will use in-memory driver that uses <a href="https://www.npmjs.com/package/node-cache">node-cache</a>
+					as an underlying cache store and does not ship with third-party caching client libraries
+					such as <a href="https://www.npmjs.com/package/redis">redis</a> or <a href="https://www.npmjs.com/package/memcached">memcached</a> modules to reduce the distribution
+				size of the library.</p>
+				<a href="#external-cache-drivers" id="external-cache-drivers" style="color: inherit; text-decoration: none;">
+					<h2>External Cache Drivers</h2>
+				</a>
+				<a href="#redis" id="redis" style="color: inherit; text-decoration: none;">
+					<h3>Redis</h3>
+				</a>
+				<p>To use Redis driver, you must first install the <a href="https://www.npmjs.com/package/redis">redis</a> module:</p>
+				<pre><code class="language-bash">npm install --save redis</code></pre>
+				<p>Then import the Redis driver and pass it to Cache constructor:</p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> {
+  Cache,
+  <span class="hljs-attr">drivers</span>: { Redis }
+} = <span class="hljs-built_in">require</span>(<span class="hljs-string">"@verdigris/nitrous"</span>);
+<span class="hljs-keyword">const</span> redisOptions = {
+  <span class="hljs-attr">host</span>: <span class="hljs-string">"127.0.0.1"</span>
+};
+<span class="hljs-keyword">const</span> cache = <span class="hljs-keyword">new</span> Cache(<span class="hljs-keyword">new</span> Redis(redisOptions));</code></pre>
+				<a href="#memcached" id="memcached" style="color: inherit; text-decoration: none;">
+					<h3>Memcached</h3>
+				</a>
+				<p>Using the Memcached driver is similar to Redis example. First install the
+				<a href="https://www.npmjs.com/package/memcached">memcached</a> module:</p>
+				<pre><code class="language-bash">npm install --save memcached</code></pre>
+				<p>Then import the Memcached driver:</p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> {
+  Cache,
+  <span class="hljs-attr">drivers</span>: { Memcached }
+} = <span class="hljs-built_in">require</span>(<span class="hljs-string">"@verdigris/nitrous"</span>);
+<span class="hljs-keyword">const</span> memcachedOptions = {
+  <span class="hljs-attr">poolSize</span>: <span class="hljs-number">10</span>
+};
+<span class="hljs-keyword">const</span> cache = <span class="hljs-keyword">new</span> Cache(<span class="hljs-keyword">new</span> Memcached(<span class="hljs-string">"127.0.0.1"</span>, memcachedOptions));</code></pre>
+				<blockquote>
+					<p><strong>NOTE:</strong> Anything other than Memcached version 1.5.0 seems to cause intermittent issues that
+						relies on calls to <code>stats cachedump</code>. If this is an issue, please report this
+					<a href="https://github.com/3rd-Eden/memcached/issues">issue</a> to the upstream library for <a href="https://www.npmjs.com/package/memcached">memcached</a>.</p>
+				</blockquote>
+				<a href="#typescript" id="typescript" style="color: inherit; text-decoration: none;">
+					<h2>TypeScript</h2>
+				</a>
+				<p>This library was written entirely in TypeScript and you will be able to import this library without
+				having to install typings (e.g. <code>@types/&lt;package&gt;</code>).</p>
+				<p><strong>Example:</strong></p>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { Cache, drivers } <span class="hljs-keyword">from</span> <span class="hljs-string">"@verdigris/nitrous"</span>;
+<span class="hljs-keyword">const</span> driver = <span class="hljs-keyword">new</span> drivers.Redis({ host: <span class="hljs-string">"127.0.0.1"</span> });
+<span class="hljs-keyword">const</span> cache = <span class="hljs-keyword">new</span> Cache(driver);</code></pre>
+				<hr>
+				<p>Copyright © 2020 <a href="https://verdigris.co">Verdigris Technologies, Inc.</a> All rights reserved.</p>
+				<p><sub>Verdigris Technologies Inc. assumes NO RESPONSIBILITY OR LIABILITY UNDER ANY CIRCUMSTANCES
+						for usage of this software. See the <a href="LICENSE.md">LICENSE.md</a> file for detailed legal
+				information.</sub></p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_verdigris_nitrous.html">@verdigris/nitrous</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_verdigris_nitrous_drivers.html">@verdigris/nitrous/drivers</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_verdigris_nitrous_util.html">@verdigris/nitrous/util</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
