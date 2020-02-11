@@ -5,44 +5,82 @@
 
 import { promisify } from "util";
 
-import _Memcached from "memcached";
+import { default as _Memcached } from "memcached";
+
 import Driver from "../driver";
 import { flatten } from "../util";
 
 type CacheDumpData = _Memcached.CacheDumpData | _Memcached.CacheDumpData[];
 
 export class Memcached extends Driver {
-  protected client: _Memcached;
-  protected _items: () => Promise<_Memcached.StatusData[]>;
-  protected _add: (
-    key: string,
-    value: any,
-    lifetime: number
-  ) => Promise<boolean>;
-  protected _get: (key: string) => Promise<string>;
-  protected _set: (
-    key: string,
-    value: any,
-    lifetime: number
-  ) => Promise<boolean>;
-  protected _touch: (key: string, lifetime: number) => Promise<void>;
-  protected _delete: (key: string) => Promise<boolean>;
+  private _client: _Memcached;
+  private _location: _Memcached.Location;
+  private _options: _Memcached.options;
 
   public constructor(
     location: _Memcached.Location,
     options?: _Memcached.options
   ) {
     super();
-    this.client = new _Memcached(location, options);
-    this._items = promisify(this.client.items).bind(this.client);
-    this._add = promisify(this.client.add).bind(this.client);
-    this._get = promisify(this.client.get).bind(this.client);
-    this._set = promisify(this.client.set).bind(this.client);
-    this._touch = promisify(this.client.touch).bind(this.client);
-    this._delete = promisify(this.client.del).bind(this.client);
+    this._location = location;
+    this._options = options;
   }
 
-  protected async cachedumpAll(): Promise<_Memcached.CacheDumpData[]> {
+  /**
+   * Lazy loads underlying Memcached client. This ensures users don't get a
+   * module not found error.
+   */
+  protected get client(): _Memcached {
+    if (!this._client) {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const __Memcached: typeof _Memcached = require("memcached");
+      this._client = new __Memcached(this._location, this._options);
+    }
+
+    return this._client;
+  }
+
+  private async _items(): Promise<_Memcached.StatusData[]> {
+    return await promisify(this.client.items).bind(this.client)();
+  }
+
+  private async _get(key: string): Promise<string> {
+    return await promisify(this.client.get).bind(this.client)(key);
+  }
+
+  private async _add(
+    key: string,
+    value: any,
+    lifetime: number
+  ): Promise<boolean> {
+    return await promisify(this.client.add).bind(this.client)(
+      key,
+      value,
+      lifetime
+    );
+  }
+
+  private async _set(
+    key: string,
+    value: any,
+    lifetime: number
+  ): Promise<boolean> {
+    return await promisify(this.client.set).bind(this.client)(
+      key,
+      value,
+      lifetime
+    );
+  }
+
+  private async _touch(key: string, lifetime: number): Promise<void> {
+    return await promisify(this.client.touch).bind(this.client)(key, lifetime);
+  }
+
+  private async _delete(key: string): Promise<boolean> {
+    return await promisify(this.client.del).bind(this.client)(key);
+  }
+
+  private async cachedumpAll(): Promise<_Memcached.CacheDumpData[]> {
     const items = await this._items();
     const cachedumpQueryArgs = flatten(
       items.map(item => {
@@ -63,9 +101,9 @@ export class Memcached extends Driver {
     const cachedumps = await Promise.all(
       cachedumpQueryArgs.map(
         ({ server, slabid, number }) =>
-          // Can't use async/await here due to weirdness with underlying memcached module.
-          // We need the callback and shallow copy the results or we'll just end up with
-          // undefined objects.
+          // Can't use async/await here due to weirdness with underlying
+          // memcached module. We need the callback and shallow copy the
+          // results or we'll just end up with undefined objects.
           new Promise((resolve: (value: CacheDumpData) => void, reject) => {
             this.client.cachedump(server, slabid, number, (err, cachedump) => {
               if (err) {
@@ -90,9 +128,9 @@ export class Memcached extends Driver {
   }
 
   public async has(key: string): Promise<boolean> {
-    // Add command in Memcached returns false if the key already exists. The
-    // lifetime is set to Unix epoch of 2678400 (Jan 31, 1970) so that the key
-    // will immediately be invalidated if it is added.
+    // Add command in Memcached throws "Item is not stored" error if the key
+    // already exists. The lifetime is set to Unix epoch of 2678400 (Jan 31,
+    // 1970) so that the key will immediately be invalidated if it is added.
     try {
       const response = await this._add(key, "INVALID", 2678400);
       return !response;
