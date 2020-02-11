@@ -5,35 +5,70 @@
 
 import { promisify } from "util";
 
-import redis from "redis";
+import {
+  RedisClient,
+  ClientOpts,
+  createClient as createClientFunc
+} from "redis";
+
 import Driver from "../driver";
 
 export class Redis extends Driver {
-  protected client: redis.RedisClient;
-  protected _keys: (pattern: string) => Promise<string[]>;
-  protected _exists: (...args: string[]) => Promise<number>;
-  protected _get: (key: string) => Promise<string>;
-  protected _set: (key: string, value: string) => Promise<"OK">;
-  protected _setex: (
-    key: string,
-    seconds: number,
-    value: string
-  ) => Promise<string>;
-  protected _ttl: (key: string) => Promise<number>;
-  protected _expire: (key: string, seconds: number) => Promise<number>;
-  protected _delete: (keys: string | string[]) => Promise<number>;
+  private _client: RedisClient;
+  private _options: ClientOpts;
 
-  public constructor(options?: redis.ClientOpts) {
+  public constructor(options?: ClientOpts) {
     super();
-    this.client = redis.createClient(options);
-    this._keys = promisify(this.client.keys).bind(this.client);
-    this._exists = promisify(this.client.exists).bind(this.client);
-    this._get = promisify(this.client.get).bind(this.client);
-    this._set = promisify(this.client.set).bind(this.client);
-    this._setex = promisify(this.client.setex).bind(this.client);
-    this._ttl = promisify(this.client.ttl).bind(this.client);
-    this._expire = promisify(this.client.expire).bind(this.client);
-    this._delete = promisify(this.client.del).bind(this.client);
+    this._options = options;
+  }
+
+  /**
+   * Lazy loads underlying Redis client. This ensures users don't get a module
+   * not found error when importing this library without installing the redis
+   * package.
+   */
+  protected get client(): RedisClient {
+    if (!this._client) {
+      const {
+        createClient
+      }: // eslint-disable-next-line @typescript-eslint/no-var-requires
+      { createClient: typeof createClientFunc } = require("redis");
+      this._client = createClient(this._options);
+    }
+
+    return this._client;
+  }
+
+  private _keys(pattern: string): Promise<string[]> {
+    return promisify(this.client.keys).bind(this.client)(pattern);
+  }
+
+  private _exists(...keys: string[]): Promise<number> {
+    return promisify(this.client.exists).bind(this.client)(...keys);
+  }
+
+  private _get(key: string): Promise<string> {
+    return promisify(this.client.get).bind(this.client)(key);
+  }
+
+  private _set(key: string, value: string): Promise<"OK"> {
+    return promisify(this.client.set).bind(this.client)(key, value);
+  }
+
+  private _setex(key: string, seconds: number, value: string): Promise<string> {
+    return promisify(this.client.setex).bind(this.client)(key, seconds, value);
+  }
+
+  private _ttl(key: string): Promise<number> {
+    return promisify(this.client.ttl).bind(this.client)(key);
+  }
+
+  private _expire(key: string, seconds: number): Promise<number> {
+    return promisify(this.client.expire).bind(this.client)(key, seconds);
+  }
+
+  private _delete(keys: string | string[]): Promise<number> {
+    return promisify(this.client.del).bind(this.client)(keys);
   }
 
   public async keys(): Promise<string[]> {
