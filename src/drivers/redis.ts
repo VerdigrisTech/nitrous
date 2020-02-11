@@ -24,7 +24,8 @@ export class Redis extends Driver {
 
   /**
    * Lazy loads underlying Redis client. This ensures users don't get a module
-   * not found error.
+   * not found error when importing this library without installing the redis
+   * package.
    */
   protected get client(): RedisClient {
     if (!this._client) {

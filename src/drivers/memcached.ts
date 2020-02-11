@@ -28,7 +28,8 @@ export class Memcached extends Driver {
 
   /**
    * Lazy loads underlying Memcached client. This ensures users don't get a
-   * module not found error.
+   * module not found error when importing this library without installing the
+   * memcached package.
    */
   protected get client(): _Memcached {
     if (!this._client) {
