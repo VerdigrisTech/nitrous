@@ -32,6 +32,10 @@
   "engines": {
     "node": ">=8.0.0"
   },
+  "optionalDependencies": {
+    "memcached": ">=2.2.2",
+    "redis": ">=2.8.0"
+  },
   "devDependencies": {
     "@types/chai": "^4.2.8",
     "@types/mocha": "^7.0.1",
