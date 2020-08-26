@@ -3,7 +3,7 @@ import { expect } from "chai";
 
 import Cache from "@nitrous/cache";
 import Driver from "@nitrous/driver";
-import { Memory } from "@nitrous/drivers/memory";
+import Memory from "@nitrous/drivers/memory";
 
 import { sleep } from "@tests/util";
 
@@ -46,7 +46,7 @@ describe("Memory Driver", function () {
     it("should return false if key does not exist in cache", async function () {
       const actual = await cache.has("foo");
       expect(actual).to.be.false;
-    })
+    });
   });
 
   describe("#get", function () {
@@ -130,10 +130,7 @@ describe("Memory Driver", function () {
     });
 
     it("should delete all values specified by multiple keys", async function () {
-      await Promise.all([
-        cache.set("foo", "foo"),
-        cache.set("bar", "bar"),
-      ]);
+      await Promise.all([cache.set("foo", "foo"), cache.set("bar", "bar")]);
       expect(await cache.delete(["foo", "bar"])).to.equal(2);
       expect(await cache.has("foo")).to.be.false;
       expect(await cache.get("foo")).to.be.undefined;
