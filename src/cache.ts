@@ -4,7 +4,7 @@
  */
 
 import Driver from "./driver";
-import { Memory } from "./drivers/memory";
+import Memory from "./drivers/memory";
 
 export default class Cache {
   protected driver: Driver;
