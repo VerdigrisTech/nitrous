@@ -32,12 +32,6 @@
   "engines": {
     "node": ">=10.0.0"
   },
-  "optionalDependencies": {
-    "@types/memcached": "^2.2.6",
-    "@types/redis": "^2.8.15",
-    "memcached": ">=2.2.2",
-    "redis": ">=2.8.0"
-  },
   "devDependencies": {
     "@types/chai": "^4.2.8",
     "@types/mocha": "^7.0.1",
@@ -51,11 +45,9 @@
     "eslint-plugin-mocha": "^6.2.2",
     "husky": "^4.2.1",
     "lint-staged": "^10.0.7",
-    "memcached": "^2.2.2",
     "mocha": "^8.1.1",
     "nyc": "^15.1.0",
     "prettier": "^2.1.1",
-    "redis": "^2.8.0",
     "ts-node": "^8.6.2",
     "tsconfig-paths": "^3.9.0",
     "typedoc": "^0.16.9",
