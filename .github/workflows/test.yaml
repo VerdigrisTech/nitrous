@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
-        node: ['8', '10', '12']
+        node: ['10', '12', '14']
     services:
       redis:
         image: redis
