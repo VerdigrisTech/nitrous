@@ -3,4 +3,4 @@
  * @module @verdigris/nitrous/drivers
  */
 
-export { Memory } from "./memory";
+export { default as Memory } from "./memory";

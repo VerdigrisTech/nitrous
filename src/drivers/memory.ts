@@ -6,7 +6,7 @@
 import NodeCache from "node-cache";
 import Driver from "../driver";
 
-export class Memory extends Driver {
+export default class Memory extends Driver {
   protected cache: NodeCache;
 
   public constructor() {
