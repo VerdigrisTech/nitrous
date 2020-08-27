@@ -40,11 +40,24 @@ npm install --save @verdigris/nitrous-driver-redis
 
 Then import the Redis driver and pass it to Cache constructor:
 
+#### JavaScript
+
 ```javascript
 const { Cache } = require("@verdigris/nitrous");
 const Redis = require("@verdigris/nitrous-driver-redis");
 const redisOptions = {
-  host: "127.0.0.1"
+  host: "127.0.0.1",
+};
+const cache = new Cache(new Redis(redisOptions));
+```
+
+#### TypeScript
+
+```typescript
+import { Cache } from "@verdigris/nitrous";
+import Redis from "@verdigris/nitrous-driver-redis";
+const redisOptions = {
+  host: "127.0.0.1",
 };
 const cache = new Cache(new Redis(redisOptions));
 ```
@@ -60,11 +73,24 @@ npm install --save @verdigris/nitrous-driver-memcached
 
 Then import the Memcached driver:
 
+#### JavaScript
+
 ```javascript
 const { Cache } = require("@verdigris/nitrous");
 const Memcached = require("@verdigris/nitrous-driver-memcached");
 const memcachedOptions = {
-  poolSize: 10
+  poolSize: 10,
+};
+const cache = new Cache(new Memcached("127.0.0.1", memcachedOptions));
+```
+
+#### TypeScript
+
+```typescript
+import { Cache } from "@verdigris/nitrous";
+import Memcached from "@verdigris/nitrous-driver-memcached";
+const memcachedOptions = {
+  poolSize: 10,
 };
 const cache = new Cache(new Memcached("127.0.0.1", memcachedOptions));
 ```
@@ -76,19 +102,6 @@ const cache = new Cache(new Memcached("127.0.0.1", memcachedOptions));
 ## API Documentation
 
 Detailed API documentation can be found [here][nitrous-url].
-
-## TypeScript
-
-This library was written entirely in TypeScript and you will be able to import this library without
-having to install typings (e.g. `@types/<package>`).
-
-**Example:**
-
-```typescript
-import { Cache, drivers } from "@verdigris/nitrous";
-const driver = new drivers.Redis({ host: "127.0.0.1" });
-const cache = new Cache(driver);
-```
 
 ---
 
