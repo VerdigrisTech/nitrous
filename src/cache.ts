@@ -26,6 +26,13 @@ export default class Cache {
   }
 
   /**
+   * Gets whether the underlying driver closed the connection.
+   */
+  public get isClosed(): boolean {
+    return this.driver.isClosed;
+  }
+
+  /**
    * Retrieve all keys.
    */
   public async keys(): Promise<string[]> {
