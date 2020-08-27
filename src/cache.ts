@@ -7,7 +7,7 @@ import Driver from "./driver";
 import Memory from "./drivers/memory";
 
 export default class Cache {
-  protected driver: Driver;
+  protected _driver: Driver;
 
   /**
    * Instantiate a new Cache with given driver. The `driver` is optional; if unspecified, defaults
@@ -15,7 +15,14 @@ export default class Cache {
    * @param {Driver} [driver] - an instance of cache driver
    */
   public constructor(driver?: Driver) {
-    this.driver = driver ?? new Memory();
+    this._driver = driver ?? new Memory();
+  }
+
+  /**
+   * Gets the underlying driver for the cache.
+   */
+  public get driver(): Driver {
+    return this._driver;
   }
 
   /**
