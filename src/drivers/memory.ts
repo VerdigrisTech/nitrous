@@ -8,14 +8,20 @@ import Driver from "../driver";
 
 export default class Memory extends Driver {
   protected cache: NodeCache;
+  protected closed: boolean;
 
   public constructor() {
     super();
     this.cache = new NodeCache();
+    this.closed = false;
+  }
+
+  public get isClosed(): boolean {
+    return this.closed;
   }
 
   public async isConnected(): Promise<boolean> {
-    return true;
+    return !this.isClosed;
   }
 
   public async keys(): Promise<string[]> {
@@ -51,6 +57,7 @@ export default class Memory extends Driver {
     try {
       this.cache.flushAll();
       this.cache.close();
+      this.closed = true;
       return true;
     } catch {
       return false;
