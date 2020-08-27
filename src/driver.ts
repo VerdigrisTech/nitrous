@@ -8,6 +8,11 @@
  */
 export default abstract class Driver {
   /**
+   * Returns whether the driver is connected to the underlying backend.
+   */
+  public abstract async isConnected(): Promise<boolean>;
+
+  /**
    * Lists all keys.
    */
   public abstract async keys(): Promise<string[]>;

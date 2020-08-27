@@ -14,6 +14,10 @@ export default class Memory extends Driver {
     this.cache = new NodeCache();
   }
 
+  public async isConnected(): Promise<boolean> {
+    return true;
+  }
+
   public async keys(): Promise<string[]> {
     return this.cache.keys();
   }
