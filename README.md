@@ -32,7 +32,8 @@ size of the library.
 
 ### Redis
 
-To use Redis driver, you must first install the [redis][redis-url] driver:
+To use Redis driver, you must first install the [redis][redis-driver-url]
+driver:
 
 ```bash
 npm install --save @verdigris/nitrous-driver-redis
@@ -65,7 +66,7 @@ const cache = new Cache(new Redis(redisOptions));
 ### Memcached
 
 Using the Memcached driver is similar to Redis example. First install the
-[memcached][memcached-url] driver:
+[memcached][memcached-driver-url] driver:
 
 ```bash
 npm install --save @verdigris/nitrous-driver-memcached
@@ -125,5 +126,7 @@ information.</sub>
 [verdigris-url]: https://verdigris.co
 [node-cache-url]: https://www.npmjs.com/package/node-cache
 [redis-url]: https://www.npmjs.com/package/redis
+[redis-driver-url]: https://www.npmjs.com/package/@verdigris/nitrous-driver-redis
 [memcached-url]: https://www.npmjs.com/package/memcached
 [memcached-issue-url]: https://github.com/3rd-Eden/memcached/issues
+[memcached-driver-url]: https://www.npmjs.com/package/@verdigris/nitrous-driver-memcached
