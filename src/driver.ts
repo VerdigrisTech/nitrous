@@ -8,6 +8,11 @@
  */
 export default abstract class Driver {
   /**
+   * Returns whether the connection to the underlying backend is closed.
+   */
+  public abstract get isClosed(): boolean;
+
+  /**
    * Returns whether the driver is connected to the underlying backend.
    */
   public abstract async isConnected(): Promise<boolean>;
